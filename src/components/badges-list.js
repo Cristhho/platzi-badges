@@ -27,9 +27,21 @@ class BadgesListItem extends React.Component {
   }
 }
 
-class BadgesList extends React.Component {
+class BadgesList extends React.PureComponent {
+
+  state = {
+    query: ''
+  }
+
+  handleFilterChange = (event) => {
+    this.setState({query: event.target.value})
+  }
+
 	render() {
-    if(this.props.badges.length === 0) {
+    const filteredBadges = this.props.badges.filter(badge => {
+      return `${badge.firstName} ${badge.lastName}`.toLowerCase().includes(this.state.query.toLowerCase());
+    });
+    if(filteredBadges === 0) {
       return(
         <div>
           <h3>No se encontro ningún bagde</h3>
@@ -41,8 +53,16 @@ class BadgesList extends React.Component {
     }
 		return(
 			<div className="BadgesList">
+        <div className="form-group">
+          <label>Filter badges</label>
+          <input
+            type="text"
+            className="form-control"
+            value={this.state.query}
+            onChange={(e) => this.handleFilterChange(e)}/>
+        </div>
         <ul className="list-unstyled">
-          {this.props.badges.map(badge => {
+          {filteredBadges.map(badge => {
             return (
               <li key={badge.id}>
                 <Link

@@ -31,7 +31,7 @@ const badgeDetails = (props) => (
 				</div>
 				<div className="col-6">
 					<h2>Actions</h2>
-					<div><Link className="btn btn-primary mb-4" to={`/badge/${props.badge.id}/edit`}>Edit</Link></div>
+					<div><Link className="btn btn-primary mb-4" to={`/badges/${props.badge.id}/edit`}>Edit</Link></div>
 					<div>
 						<button onClick={props.onOpenModal} className="btn btn-danger">Delete</button>
 						<DeleteBadgeModal
