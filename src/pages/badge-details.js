@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 
 import confLogo from '../img/platziconf-logo.svg';
 import Badge from '../components/badge';
+import DeleteBadgeModal from '../components/delete-badge-modal';
 
 const badgeDetails = (props) => (
 	<div>
@@ -31,7 +32,13 @@ const badgeDetails = (props) => (
 				<div className="col-6">
 					<h2>Actions</h2>
 					<div><Link className="btn btn-primary mb-4" to={`/badge/${props.badge.id}/edit`}>Edit</Link></div>
-					<div><button className="btn btn-danger">Delete</button></div>
+					<div>
+						<button onClick={props.onOpenModal} className="btn btn-danger">Delete</button>
+						<DeleteBadgeModal
+							isOpen={props.isOpen}
+							onClose={props.onCloseModal}
+							onDeleteBadge={props.onDeleteBadge}/>
+					</div>
 				</div>
 			</div>
 		</div>
